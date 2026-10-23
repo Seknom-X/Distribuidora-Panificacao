@@ -277,6 +277,7 @@ Concorrência no estoque, pedidos duplicados por falhas de rede, validade de lot
 - **Aula 9.1:** pedidos pendentes, validação de carteira, preços por item e idempotência por UUID — **Build, migration e testes locais aprovados**. [Evidências](docs/09-PEDIDOS-PENDENTES.md).
 - **Aula 9.2:** corte manual, consumo FEFO, alocações por lote e transação atômica — **Build, migration e testes locais aprovados**. [Registro](docs/09-2-CORTE-MANUAL-PEDIDOS.md).
 - **Aula 9.3:** prévia consultiva das janelas de 12h e 19h — **erro de arquivo bloqueado resolvido e build reportado como funcionando; logs de xUnit e PowerShell não apresentados**. [Planejamento](docs/09-3-JANELAS-DE-CORTE.md).
-- **Aula 9.4:** fechamento manual e persistência do lote com IDs de pedidos, sem baixar estoque — **implementação preparada, aguardando build, migration e testes**. [Regras](docs/09-4-FECHAMENTO-JANELAS.md).
+- **Aula 9.4:** fechamento manual da janela de pedidos — **script corrigido e execução confirmada pelo desenvolvedor**; não movimenta estoque. [Regras](docs/09-4-FECHAMENTO-JANELAS.md).
+- **Aula 9.5:** processamento transacional de todos os pedidos de uma janela com cortes explícitos e baixa FEFO — **pacote preparado, aguardando build, migration e testes**. [Regras e roteiro](docs/09-5-PROCESSAMENTO-LOTE.md).
 
 Não expor os Controllers sem autorização JWT e não versionar senhas, `.env` ou User Secrets.
