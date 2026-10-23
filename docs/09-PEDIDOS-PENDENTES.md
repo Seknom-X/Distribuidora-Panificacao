@@ -55,4 +55,4 @@ Os registros do script **não são removidos** e devem ser criados apenas no MyS
 
 Os Controllers ainda não estão protegidos por JWT: usar somente em ambiente de desenvolvimento local, jamais expor em rede pública. O `VendedorId` enviado é conferido contra a carteira do cliente, mas ainda não identifica um usuário autenticado. Nesta etapa não há corte, FEFO, baixa, faturamento nem processamento automático em horários fixos; esses fluxos serão desenvolvidos em etapas posteriores.
 
-**Testes ainda não executados na máquina do desenvolvedor.** Atualizar este documento com evidências de execução e o andamento no README quando forem fornecidas.
+**Validação informada pelo desenvolvedor em 23/10/2026:** Build succeeded, migration PedidoChaveRequisicao aplicada e script de testes de pedidos aprovado no MySQL local. Cadastro pendente sem baixa, idempotência da criação e validações da etapa passaram. **Próxima etapa:** [Aula 9.2 — Corte manual FEFO](09-2-CORTE-MANUAL-PEDIDOS.md), ainda aguardando testes.
