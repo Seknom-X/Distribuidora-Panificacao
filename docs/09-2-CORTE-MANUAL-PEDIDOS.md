@@ -38,7 +38,7 @@ A operação usa transação com isolamento `ReadCommitted`; primeiro faz um UPD
 5. Corte acima da quantidade solicitada retorna 400.
 6. Consulta de alocações identifica lotes e movimentos.
 
-O pacote de teste `Executar_Teste_Corte_Pedidos.ps1` cria dados fictícios no MySQL de desenvolvimento e mantém os registros para inspeção. **Ainda não há evidência de execução desta Aula 9.2**.
+O pacote de teste `Executar_Teste_Corte_Pedidos.ps1` cria dados fictícios no MySQL de desenvolvimento e mantém os registros para inspeção. **Validação informada pelo desenvolvedor em 23/10/2026:** Build succeeded, migration `CortePedidosAlocacoes` aplicada e script de testes de corte aprovado no MySQL local. A confirmação não substitui testes independentes de concorrência e segurança.
 
 ## Limitações e próximos passos
 
