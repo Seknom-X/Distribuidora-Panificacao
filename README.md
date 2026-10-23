@@ -263,3 +263,15 @@ Concorrência no estoque, pedidos duplicados por falhas de rede, validade de lot
 **Próximo passo prático:** construir o `DistribuidoraDbContext`, revisar relacionamentos, configurar novo banco MySQL **exclusivo** `DistribuidoraDb` e gerar a migration. Não usar bancos do projeto LojaLimpeza.
 
 **Legenda:** RF = Requisito Funcional · RNF = Não Funcional · RN = Regra de Negócio · CT = Caso de Teste · D = Decisão. **Documentação viva:** só marcar como concluído após código, execução e teste demonstrável.
+
+## 19. Atualização do andamento — 22/10/2026
+
+> **Registro de acompanhamento:** estado informado pelo desenvolvedor. O repositório contém atualmente a documentação; os arquivos de código-fonte e migrations devem ser publicados a partir do computador de desenvolvimento.
+
+- **Aulas 1–3:** solução inicial, API, entidades, EF Core, MySQL Docker e migrations — relatadas como concluídas.
+- **Aula 4:** CRUD de vendedores — testado por POST/GET/PUT/PATCH.
+- **Aula 5:** cadastro de clientes associado a vendedor — testado na API e no MySQL.
+- **Aula 6:** roteiro inicial, reordenação e script PowerShell — funcionamento confirmado.
+- **Aula 7:** catálogo, grupos e lotes com validade — **implementação preparada, aguardando build, revisão da migration `CatalogoLotes` e testes**. [Plano e critérios da Aula 7](docs/07-CATALOGO-LOTES.md).
+
+Não expor os Controllers sem autorização JWT e não versionar senhas, `.env` ou User Secrets.
