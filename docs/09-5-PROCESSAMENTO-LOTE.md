@@ -63,6 +63,21 @@ O desenvolvedor compartilhou o resultado do script `Executar_Teste_Processamento
 - Corpo vazio rejeitado com **HTTP 400**, sem desconto de estoque.
 - Script confirmou **TESTES DE LEITURA APROVADOS**.
 
-**Atenção:** a operação POST com plano válido ainda **não foi executada ou validada**. Portanto, não declarar aprovada a baixa FEFO, a transação da janela ou a resistência a reenvios concorrentes.
+**Nota histórica:** nessa primeira execução apenas a leitura havia sido validada. Veja abaixo a evidência posterior de processamento real, mantendo pendentes as verificações de estoque e concorrência.
 
 **Próximo passo:** buscar `GET /api/lotes-processamento/1`, detalhar cada pedido com `GET /api/pedidos/{id}`, consultar `GET /api/produtos/{id}/estoque` e criar um `plano-lote-1.json` com quantidades explicitamente escolhidas. Usar o script de preparação local **sem enviar** processamento. Quando o usuário revisar as quantidades, o processamento pode ser disparado conscientemente pelo parâmetro `-ConfirmarProcessamento`, somente no MySQL de desenvolvimento.
+
+
+## Processamento real validado — 23/10/2026
+
+**Evidência fornecida pelo desenvolvedor no PowerShell, executando contra a API local e MySQL de desenvolvimento:**
+
+- Plano `plano-lote-1.json`: `pedidoId = 1`, `produtoId = 4`, `quantidadeAtendida = 3`.
+- POST pelo script `Executar_Teste_Processamento_Janela.ps1 -LoteId 1 -ArquivoPlano .\\plano-lote-1.json -ConfirmarProcessamento`: **sucesso**, 3 unidades e valor atendido de **R$ 37,50**.
+- GET `/api/lotes-processamento/1/processamento` após a operação: `processado = True`, `pedidosIncluidos = 1`, `pedidosProcessados = 1`, `totalUnidadesAtendidas = 3`, `valorAtendido = 37.50`.
+- Pedido 1: `status = 4 (AtendidoParcialmente)`, `quantidadeSolicitada = 8`, `quantidadeAtendida = 3` e **5 unidades cortadas**.
+- Data retornada pela API: `dataProcessamentoUtc = 2026-10-23T22:57:17.662335`.
+
+**Confirmação:** processamento de uma janela com um pedido validado pelo script e pelo GET de status. **Ainda pendente de inspeção direta no Workbench**: quais lotes físicos foram debitados, saldo após o corte, movimento e rastreabilidade FEFO. Também faltam testes completos de concorrência, rollback com múltiplos pedidos, duplicação POST pós-processamento e autenticação JWT. A documentação não afirma que esses cenários já passaram.
+
+Para inspecionar o banco, usar `AlocacoesLotePedido`, `LotesEstoque`, `MovimentacoesEstoque` e `ItensPedido` vinculados ao `PedidoId=1`. Não reenviar processamento real sem necessidade: a API deve rejeitar segunda tentativa com HTTP 409.
