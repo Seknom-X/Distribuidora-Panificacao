@@ -272,6 +272,7 @@ Concorrência no estoque, pedidos duplicados por falhas de rede, validade de lot
 - **Aula 4:** CRUD de vendedores — testado por POST/GET/PUT/PATCH.
 - **Aula 5:** cadastro de clientes associado a vendedor — testado na API e no MySQL.
 - **Aula 6:** roteiro inicial, reordenação e script PowerShell — funcionamento confirmado.
-- **Aula 7:** catálogo, grupos e lotes com validade — **implementação preparada, aguardando build, revisão da migration `CatalogoLotes` e testes**. [Plano e critérios da Aula 7](docs/07-CATALOGO-LOTES.md).
+- **Aula 7:** grupos, produtos, lotes e estoque — **testes locais aprovados**: saldo 20/20/0; conflito de lote duplicado (409), quantidade zero (400) e grupo com produto ativo (409). [Registro](docs/07-CATALOGO-LOTES.md).
+- **Aula 8:** movimentações por lote (entrada/saída), controle atômico de saldo e histórico — **pacote preparado, aguardando compilação, migration e testes**. [Plano e aceite](docs/08-MOVIMENTACOES-ESTOQUE.md).
 
 Não expor os Controllers sem autorização JWT e não versionar senhas, `.env` ou User Secrets.
