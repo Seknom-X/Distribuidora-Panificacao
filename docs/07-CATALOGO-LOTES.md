@@ -43,4 +43,16 @@ O relacionamento Produto 1:N LoteEstoque permite controlar quantidades e datas d
 
 ## Histórico e documentação viva
 
-Aulas 1 a 6 foram desenvolvidas e o usuário confirmou o funcionamento do roteiro. Esta Aula 7 foi **preparada**, mas ainda depende de validação da migration e dos testes no computador de desenvolvimento. Atualizar o status após evidência de execução, sem declarar prematuramente a conclusão.
+Aulas 1 a 6 foram desenvolvidas e o usuário confirmou o funcionamento do roteiro. Esta Aula 7 foi validada com os resultados enviados pelo desenvolvedor; veja os resultados de teste abaixo.
+
+
+## Resultados comprovados pelo teste da Aula 7
+
+**Status atualizado em 22/10/2026: concluída no ambiente local, segundo o retorno do PowerShell enviado pelo desenvolvedor.**
+
+- Saldo físico = 20, estoque não vencido = 20 e vencido = 0.
+- Lote duplicado: HTTP 409.
+- Quantidade zero: HTTP 400.
+- Desativação de grupo com produto ativo: HTTP 409.
+
+O script precisou de um pequeno ajuste na leitura da coleção retornada pelo PowerShell antes de passar. Os resultados acima confirmam os testes citados, não uma revisão independente de todo o projeto. [Próxima etapa: movimentações por lote](08-MOVIMENTACOES-ESTOQUE.md).
