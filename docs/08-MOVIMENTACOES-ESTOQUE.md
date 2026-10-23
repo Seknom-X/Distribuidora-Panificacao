@@ -58,3 +58,17 @@ Gerar `MovimentacoesEstoque`, criando apenas a nova tabela, seus índices e chav
 ## 7. Etapas futuras
 
 Testes xUnit de concorrência e rollback, FEFO em pedidos, corte proporcional/manual e autorização por papéis. Este exercício não implementa baixa automática de pedidos.
+
+
+## 8. Validação realizada em 22/10/2026
+
+**Aula 8 aprovada no MySQL Docker local (porta 3307), conforme log PowerShell enviado pelo desenvolvedor.** Evidências:
+
+- Saída de 3 no lote A: saldo 12 → 9 (movimentação ID 1).
+- Reenvio da mesma operação: saldo permanece 9, evitando baixa dupla.
+- Entrada de 5 no lote B: saldo 8 → 13 (movimentação ID 2).
+- Saldo agregado: físico 22, válido 22, vencido 0.
+- Saída sem saldo: HTTP 409; quantidade zero: HTTP 400; reutilização de chave em movimento diferente: HTTP 409.
+- Histórico de movimentações consultado; produto de teste ID 3, lotes IDs 5 e 6.
+
+**Escopo dos testes:** execução funcional local. Testes de concorrência com requisições paralelas, autenticação JWT, integração FEFO com pedidos e corte continuam pendentes.
