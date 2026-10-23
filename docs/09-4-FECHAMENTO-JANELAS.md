@@ -46,4 +46,4 @@ Se o teste escolher uma janela com **zero pedidos**, apenas o fechamento vazio t
 
 JWT/Admin ainda não foi implementado. Usar somente em localhost. O processamento automático, o FEFO por lote fechado, a retomada após falhas e os testes de concorrência agressivos continuam pendentes. A prévia da Aula 9.3 continuará exibindo pedidos pendentes, inclusive os já associados a um lote fechado, até a futura evolução do fluxo. O fechamento não é um lote físico de mercadoria.
 
-**Aula 9.4 ainda não testada no ambiente do usuário.**
+**Aula 9.4 validada em 23/10/2026:** o desenvolvedor confirmou que o teste de fechamento passou após a correção da contagem de pedidos recebidos pelo PowerShell. A falha original estava na interpretação da coleção pelo script; a validação agora confere a lista com `pedidosIncluidos`. O fechamento deve permanecer sem desconto de estoque. A confirmação não comprova teste de concorrência nem necessariamente associação de pedidos em janela não vazia, pois o log completo não foi enviado.
