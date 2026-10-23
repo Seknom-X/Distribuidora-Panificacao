@@ -52,3 +52,17 @@ Após compilar e aplicar a migration, executar `dotnet test` e o script `Executa
 ## Pendências
 
 JWT/Admin, fuso de referência comercial para validade, cancelamento quando não for possível atender nenhuma unidade, devoluções, lógica de cortes automáticos e agendamento às 12h/19h. Até lá, disponibilizar endpoints somente em `localhost`.
+
+
+## Primeiro teste de leitura aprovado — 23/10/2026
+
+O desenvolvedor compartilhou o resultado do script `Executar_Teste_Processamento_Janela.ps1 -LoteId 1`:
+
+- Lote ID 1, com **1 pedido** incluído.
+- `processado = False`, quantidade atendida = **0**.
+- Corpo vazio rejeitado com **HTTP 400**, sem desconto de estoque.
+- Script confirmou **TESTES DE LEITURA APROVADOS**.
+
+**Atenção:** a operação POST com plano válido ainda **não foi executada ou validada**. Portanto, não declarar aprovada a baixa FEFO, a transação da janela ou a resistência a reenvios concorrentes.
+
+**Próximo passo:** buscar `GET /api/lotes-processamento/1`, detalhar cada pedido com `GET /api/pedidos/{id}`, consultar `GET /api/produtos/{id}/estoque` e criar um `plano-lote-1.json` com quantidades explicitamente escolhidas. Usar o script de preparação local **sem enviar** processamento. Quando o usuário revisar as quantidades, o processamento pode ser disparado conscientemente pelo parâmetro `-ConfirmarProcessamento`, somente no MySQL de desenvolvimento.
