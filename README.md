@@ -274,5 +274,6 @@ Concorrência no estoque, pedidos duplicados por falhas de rede, validade de lot
 - **Aula 6:** roteiro inicial, reordenação e script PowerShell — funcionamento confirmado.
 - **Aula 7:** grupos, produtos, lotes e estoque — **testes locais aprovados**: saldo 20/20/0; conflito de lote duplicado (409), quantidade zero (400) e grupo com produto ativo (409). [Registro](docs/07-CATALOGO-LOTES.md).
 - **Aula 8:** movimentações por lote (entrada/saída), transação, histórico e idempotência — **testes locais aprovados**: saídas, entradas, saldos 22/22/0 e proteções 400/409. [Evidências](docs/08-MOVIMENTACOES-ESTOQUE.md).
+- **Aula 9.1:** pedidos pendentes, validação de carteira, preços por item e idempotência por UUID — **arquivos preparados, aguardando build, migration e testes**. [Critérios da etapa](docs/09-PEDIDOS-PENDENTES.md).
 
 Não expor os Controllers sem autorização JWT e não versionar senhas, `.env` ou User Secrets.
