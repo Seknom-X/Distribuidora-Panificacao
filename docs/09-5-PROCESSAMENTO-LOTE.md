@@ -78,6 +78,11 @@ O desenvolvedor compartilhou o resultado do script `Executar_Teste_Processamento
 - Pedido 1: `status = 4 (AtendidoParcialmente)`, `quantidadeSolicitada = 8`, `quantidadeAtendida = 3` e **5 unidades cortadas**.
 - Data retornada pela API: `dataProcessamentoUtc = 2026-10-23T22:57:17.662335`.
 
-**Confirmação:** processamento de uma janela com um pedido validado pelo script e pelo GET de status. **Ainda pendente de inspeção direta no Workbench**: quais lotes físicos foram debitados, saldo após o corte, movimento e rastreabilidade FEFO. Também faltam testes completos de concorrência, rollback com múltiplos pedidos, duplicação POST pós-processamento e autenticação JWT. A documentação não afirma que esses cenários já passaram.
+**Confirmação:** processamento de uma janela com um pedido validado pelo script e pelo GET de status. **Confirmação posterior de inspeção no Workbench:** em 26/10/2026, o desenvolvedor informou que a consulta SQL de rastreabilidade do pedido 1 executou corretamente. O resultado das linhas não foi copiado para a conversa; por isso não declaramos um lote específico ou saldo final sem evidência. Também faltam testes completos de concorrência, rollback com múltiplos pedidos, duplicação POST pós-processamento e autenticação JWT. A documentação não afirma que esses cenários já passaram.
 
 Para inspecionar o banco, usar `AlocacoesLotePedido`, `LotesEstoque`, `MovimentacoesEstoque` e `ItensPedido` vinculados ao `PedidoId=1`. Não reenviar processamento real sem necessidade: a API deve rejeitar segunda tentativa com HTTP 409.
+
+
+## Verificação adicional em 26/10/2026
+
+O desenvolvedor confirmou que a consulta SQL de rastreabilidade feita sobre `AlocacoesLotePedido`, `ItensPedido`, `LotesEstoque` e `MovimentacoesEstoque` funcionou. O processamento do lote 1 (pedido 1, produto 4, 3 unidades atendidas, R$ 37,50) está validado para esse caso de uso. Ainda é necessário testar concorrência, reenvio de POST de processamento, rollback de múltiplos pedidos e autorização de usuários. A próxima aula prioriza autenticação JWT. [Plano de conclusão](10-ROADMAP-FINALIZACAO.md).
