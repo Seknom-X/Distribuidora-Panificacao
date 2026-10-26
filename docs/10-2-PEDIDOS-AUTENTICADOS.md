@@ -68,3 +68,14 @@ O script pede credenciais do Vendedor sem exibi-las, usa cliente ativo da própr
 - Os primeiros testes automatizados de DTO não substituem testes com requisições concorrentes ou banco separado de integração.
 - JWT e autorização por papéis não tornam a API pronta para produção: faltam HTTPS, limitação de requisições, auditoria e revisão de segurança.
 - O envio de pedidos offline no MAUI será implementado nas Aulas 17–18.
+
+
+## Correção do teste de carteira vazia — 26/10/2026
+
+Na execução do script `Executar_Teste_Pedido_JWT_Vendedor.ps1`, o desenvolvedor recebeu `FALHA: A carteira nao tem clientes ativos`. Na Aula 10.1, o script de teste antigo informou um cliente e um pedido, mas usava `@(Invoke-RestMethod ...)`, cuja contagem de listas vazias pode ser enganosa no Windows PowerShell. O script da Aula 10.2 filtrou os itens não nulos e por isso identificou carteira vazia antes de criar pedido.
+
+**Diagnóstico definitivo exige consulta:** `SELECT Id, RazaoSocial, VendedorId, Ativo FROM Clientes WHERE VendedorId=5;` no banco local `DistribuidoraDb`. A API `GET /api/me/clientes` retorna somente `Ativo=1` e `VendedorId` da claim JWT.
+
+Pacote de recuperação `Correcao_Aula10_2_Carteira_e_Teste_JWT.zip` inclui dois scripts: `Executar_Teste_Pedido_JWT_Vendedor_CORRIGIDO.ps1` (contagem por JSON bruto, diagnóstico, demais verificações) e `Cadastrar_Cliente_Teste_JWT_Admin.ps1` (login Admin, consulta carteira, criação opcional de padaria fictícia para vendedor ativo, somente com confirmação S, somente localhost). Nenhum arquivo C# é alterado e nenhuma migration é necessária. A criação de cliente/pedido de teste modifica apenas dados do MySQL de desenvolvimento, sem baixa de estoque.
+
+**Status:** correção entregue; cadastro do cliente e aprovação da Aula 10.2 ainda precisam ser confirmados pelo desenvolvedor.
