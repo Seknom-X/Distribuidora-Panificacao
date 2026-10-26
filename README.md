@@ -287,6 +287,11 @@ Não expor os Controllers sem autorização JWT e não versionar senhas, `.env` 
 
 O restante do MVP foi dividido em **dez macroetapas didáticas (Aulas 10–19)**, priorizando JWT, vendas, financeiro, MVC, MAUI + SQLite offline, testes e entrega. Algumas poderão exigir subetapas adicionais; não há prazo fixado. Veja [o planejamento detalhado](docs/10-ROADMAP-FINALIZACAO.md). Integrações bancárias e fiscais reais e otimizações avançadas estão fora do MVP proposto.
 
-## 21. Aula 10.1 — Autenticação JWT (em validação)
+## 21. Aulas 10.1 e 10.2 — JWT e pedidos autenticados
 
-Preparado o pacote da [Aula 10.1](docs/10-1-AUTENTICACAO-JWT.md) com login JWT, Admin por bootstrap local, contas vinculadas a vendedores, restrição Admin por padrão e rotas de leitura `/api/me` para Vendedor. **Ainda aguardando instalação da dependência JwtBearer 10.0.13, compilação, migration `UsuariosAutenticacao` e testes no Windows.** As APIs antigas passarão a exigir Bearer Admin; scripts sem token receberão 401. Não expor o serviço na rede antes de revisar a segurança.
+Preparado o pacote da [Aula 10.1](docs/10-1-AUTENTICACAO-JWT.md) com login JWT, Admin por bootstrap local, contas vinculadas a vendedores, restrição Admin por padrão e rotas de leitura `/api/me` para Vendedor. **Migração `UsuariosAutenticacao` aplicada, Admin cadastrado, conta do Vendedor criada, e testes JWT do Vendedor aprovados em 26/10/2026.** As APIs antigas passarão a exigir Bearer Admin; scripts sem token receberão 401. Não expor o serviço na rede antes de revisar a segurança.
+
+
+### Aula 10.2 (preparada, aguardando validação)
+
+Novo POST autenticado `/api/me/pedidos`, derivando o `vendedorId` exclusivamente do JWT e impedindo cadastros para clientes de outras carteiras. Também há GET de detalhe protegido, xUnit de contrato e script PowerShell com idempotência/401/403/409. **Nenhuma migration; testes da Aula 10.2 ainda pendentes.** [Instruções](docs/10-2-PEDIDOS-AUTENTICADOS.md).
