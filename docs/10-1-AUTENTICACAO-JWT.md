@@ -64,3 +64,14 @@ A implementação foi revisada estaticamente, mas o ambiente de criação do pac
 O instalador original `Aplicar_JWT_Program.ps1` exige que a declaração `var app = builder.Build();` ocupe toda a linha e não aceita comentário após o `;` nem a forma `WebApplication app = builder.Build();`. O desenvolvedor encontrou a mensagem `Nao foi possivel localizar um unico var app = builder.Build();` durante a Aula 10.1. **Não é uma falha confirmada do código C#** e o instalador interrompe antes de modificar o arquivo.
 
 Foi fornecido um script local substituto `Aplicar_JWT_Program_CORRIGIDO.ps1`, que suporta espaços flexíveis, comentários ao fim da linha e declaração `WebApplication app`. Ele confere se há um único ponto de inserção, evita duplicar configuração JWT, cria backup antes de gravar e recusa executar se a estrutura real for diferente. Se a execução ainda falhar, revisar o `Program.cs` real e integrar manualmente, sem remover DbContext, Controllers ou outros serviços. **Correção ainda não validada no Windows do desenvolvedor.**
+
+
+## Problema no cadastro de usuário Vendedor — diagnóstico
+
+O script inicial `Cadastrar_Usuario_Vendedor.ps1` monta a lista usando `@(Invoke-RestMethod ...)`. Em algumas versões do PowerShell, a lista JSON é tratada como um único objeto aninhado, e `Format-Table` exibe cabeçalhos sem valores. **Isso não comprova que o banco esteja sem vendedores.** Confirmar com `SELECT Id, Nome, Email, Ativo FROM Vendedores ORDER BY Id;` e usar um ID com `Ativo=1`.
+
+A chamada `POST /api/auth/usuarios/vendedor` retornou HTTP 400 na tentativa de vincular o vendedor ID 5. No código do Controller, esse status pode vir de `Vendedor nao encontrado ou inativo`, `E-mail invalido` ou das validações automáticas do DTO (por exemplo, senha menor que o mínimo exigido no `AutenticacaoDtos.cs`). O próximo teste deve mostrar o corpo JSON do 400; **não tratar uma causa provável como confirmada sem essa resposta**.
+
+Disponibilizado um script local corrigido `Cadastrar_Usuario_Vendedor_CORRIGIDO_DIAGNOSTICO.ps1`, que desenrola a lista no pipeline, exige selecionar um ID realmente ativo ou cadastra primeiro um vendedor via API, confirma a senha com leitura oculta e mostra a mensagem de erro do HTTP sem expor senha nem token. A opção `-SenhaMinima 8` só pode ser usada caso `CriarUsuarioVendedorDto` na API já tenha `MinLength(8)`. Não cria migration; só altera dados no MySQL de desenvolvimento quando o usuário optar por novo vendedor/conta.
+
+**Validação pendente**: execução do script corrigido no Windows do desenvolvedor.
