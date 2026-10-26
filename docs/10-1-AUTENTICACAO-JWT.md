@@ -57,3 +57,10 @@ O bootstrap do Admin pede senha localmente sem exibição e usa `PasswordHasher<
 **A Aula 10.1 entrega acesso de leitura ao vendedor.** O envio de pedidos pelo vendedor autenticado ainda precisa de um endpoint que derive o vínculo do token, sem aceitar o `VendedorId` do corpo. Esse fluxo fica para uma subetapa posterior. Também faltam rate limiting, HTTPS de produção, política de bloqueio, refresh/revogação, auditoria detalhada e testes completos de isolamento com múltiplos usuários.
 
 A implementação foi revisada estaticamente, mas o ambiente de criação do pacote não possui SDK .NET nem PowerShell; somente o Windows do desenvolvedor pode comprovar compilação e execução local.
+
+
+## Correção do instalador do Program.cs
+
+O instalador original `Aplicar_JWT_Program.ps1` exige que a declaração `var app = builder.Build();` ocupe toda a linha e não aceita comentário após o `;` nem a forma `WebApplication app = builder.Build();`. O desenvolvedor encontrou a mensagem `Nao foi possivel localizar um unico var app = builder.Build();` durante a Aula 10.1. **Não é uma falha confirmada do código C#** e o instalador interrompe antes de modificar o arquivo.
+
+Foi fornecido um script local substituto `Aplicar_JWT_Program_CORRIGIDO.ps1`, que suporta espaços flexíveis, comentários ao fim da linha e declaração `WebApplication app`. Ele confere se há um único ponto de inserção, evita duplicar configuração JWT, cria backup antes de gravar e recusa executar se a estrutura real for diferente. Se a execução ainda falhar, revisar o `Program.cs` real e integrar manualmente, sem remover DbContext, Controllers ou outros serviços. **Correção ainda não validada no Windows do desenvolvedor.**
