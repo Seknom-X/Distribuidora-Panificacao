@@ -278,6 +278,11 @@ Concorrência no estoque, pedidos duplicados por falhas de rede, validade de lot
 - **Aula 9.2:** corte manual, consumo FEFO, alocações por lote e transação atômica — **Build, migration e testes locais aprovados**. [Registro](docs/09-2-CORTE-MANUAL-PEDIDOS.md).
 - **Aula 9.3:** prévia consultiva das janelas de 12h e 19h — **erro de arquivo bloqueado resolvido e build reportado como funcionando; logs de xUnit e PowerShell não apresentados**. [Planejamento](docs/09-3-JANELAS-DE-CORTE.md).
 - **Aula 9.4:** fechamento manual da janela de pedidos — **script corrigido e execução confirmada pelo desenvolvedor**; não movimenta estoque. [Regras](docs/09-4-FECHAMENTO-JANELAS.md).
-- **Aula 9.5:** processamento transacional de janela — **processamento real do lote 1 validado localmente**: pedido 1, produto 4, 8 solicitadas, 3 atendidas, status parcial e valor R$ 37,50; retorno confirma `processado=True`. **Inspeção dos lotes físicos/FEFO no Workbench e testes de concorrência permanecem pendentes.** [Evidências e próximos passos](docs/09-5-PROCESSAMENTO-LOTE.md).
+- **Aula 9.5:** processamento transacional de janela — **processamento real do lote 1 validado localmente**: pedido 1, produto 4, 8 solicitadas, 3 atendidas, status parcial e valor R$ 37,50; retorno confirma `processado=True`. **Consulta de rastreabilidade no Workbench confirmada pelo desenvolvedor; testes de concorrência permanecem pendentes.** [Evidências e próximos passos](docs/09-5-PROCESSAMENTO-LOTE.md).
 
 Não expor os Controllers sem autorização JWT e não versionar senhas, `.env` ou User Secrets.
+
+
+## 20. Roteiro de conclusão do MVP — 26/10/2026
+
+O restante do MVP foi dividido em **dez macroetapas didáticas (Aulas 10–19)**, priorizando JWT, vendas, financeiro, MVC, MAUI + SQLite offline, testes e entrega. Algumas poderão exigir subetapas adicionais; não há prazo fixado. Veja [o planejamento detalhado](docs/10-ROADMAP-FINALIZACAO.md). Integrações bancárias e fiscais reais e otimizações avançadas estão fora do MVP proposto.
