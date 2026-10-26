@@ -86,3 +86,8 @@ O desenvolvedor conseguiu listar quatro vendedores ativos (IDs 2, 3, 4 e 5), inc
 A mensagem do script `Senha (minimo 2 caracteres)` não reflete a validação da API: é necessário não confundir o mínimo de **2 para Nome** com o mínimo da senha, e conferir o valor real do parâmetro no script em execução. Nenhuma senha deve ser enviada pelo chat.
 
 **Aguardando validação após recompilação e reinício da API.**
+
+
+## Cadastro de conta Vendedor confirmado — 26/10/2026
+
+O desenvolvedor confirmou que o cadastro da conta do vendedor foi concluído após corrigir o limite da senha em `CriarUsuarioVendedorDto.Senha`. A conta foi vinculada ao vendedor ativo de ID 5. **Ainda falta a validação do script `Executar_Teste_JWT_Vendedor.ps1`** para comprovar o isolamento de acesso, respostas 403 das rotas administrativas e vinculação da carteira. Não registrar a Aula 10.1 como concluída antes desses testes. Nenhuma senha ou token é versionado.
