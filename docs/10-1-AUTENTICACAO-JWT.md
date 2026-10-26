@@ -75,3 +75,14 @@ A chamada `POST /api/auth/usuarios/vendedor` retornou HTTP 400 na tentativa de v
 Disponibilizado um script local corrigido `Cadastrar_Usuario_Vendedor_CORRIGIDO_DIAGNOSTICO.ps1`, que desenrola a lista no pipeline, exige selecionar um ID realmente ativo ou cadastra primeiro um vendedor via API, confirma a senha com leitura oculta e mostra a mensagem de erro do HTTP sem expor senha nem token. A opção `-SenhaMinima 8` só pode ser usada caso `CriarUsuarioVendedorDto` na API já tenha `MinLength(8)`. Não cria migration; só altera dados no MySQL de desenvolvimento quando o usuário optar por novo vendedor/conta.
 
 **Validação pendente**: execução do script corrigido no Windows do desenvolvedor.
+
+
+## Validação de senha do vendedor — HTTP 400
+
+O desenvolvedor conseguiu listar quatro vendedores ativos (IDs 2, 3, 4 e 5), incluindo ID **5**, e a API respondeu com erro de validação automático: `The field Senha must be a string or array type with a minimum length of '12'.`. Portanto, a causa comprovada é a validação `[Required, MinLength(12), MaxLength(128)]` de `CriarUsuarioVendedorDto.Senha`, em `Distribuidora.API/DTOs/AutenticacaoDtos.cs`. O ID 5 está ativo; não recriar o vendedor.
+
+**Correção para desenvolvimento acadêmico, conforme preferência de mínimo 8:** alterar o atributo para `[Required, MinLength(8), MaxLength(128)]`, parar API, executar `dotnet build .\\Distribuidora.API\\Distribuidora.API.csproj` e reiniciar a API. No script `Cadastrar_Usuario_Vendedor_CORRIGIDO_DIAGNOSTICO.ps1`, usar `-SenhaMinima 8` e escolher o mesmo ID 5. **Sem migration**, pois é só validação DTO. Alternativa sem alteração de código: criar senha com 12+ caracteres.
+
+A mensagem do script `Senha (minimo 2 caracteres)` não reflete a validação da API: é necessário não confundir o mínimo de **2 para Nome** com o mínimo da senha, e conferir o valor real do parâmetro no script em execução. Nenhuma senha deve ser enviada pelo chat.
+
+**Aguardando validação após recompilação e reinício da API.**
