@@ -286,3 +286,7 @@ Não expor os Controllers sem autorização JWT e não versionar senhas, `.env` 
 ## 20. Roteiro de conclusão do MVP — 26/10/2026
 
 O restante do MVP foi dividido em **dez macroetapas didáticas (Aulas 10–19)**, priorizando JWT, vendas, financeiro, MVC, MAUI + SQLite offline, testes e entrega. Algumas poderão exigir subetapas adicionais; não há prazo fixado. Veja [o planejamento detalhado](docs/10-ROADMAP-FINALIZACAO.md). Integrações bancárias e fiscais reais e otimizações avançadas estão fora do MVP proposto.
+
+## 21. Aula 10.1 — Autenticação JWT (em validação)
+
+Preparado o pacote da [Aula 10.1](docs/10-1-AUTENTICACAO-JWT.md) com login JWT, Admin por bootstrap local, contas vinculadas a vendedores, restrição Admin por padrão e rotas de leitura `/api/me` para Vendedor. **Ainda aguardando instalação da dependência JwtBearer 10.0.13, compilação, migration `UsuariosAutenticacao` e testes no Windows.** As APIs antigas passarão a exigir Bearer Admin; scripts sem token receberão 401. Não expor o serviço na rede antes de revisar a segurança.
