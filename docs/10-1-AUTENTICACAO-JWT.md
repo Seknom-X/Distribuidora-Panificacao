@@ -91,3 +91,8 @@ A mensagem do script `Senha (minimo 2 caracteres)` não reflete a validação da
 ## Cadastro de conta Vendedor confirmado — 26/10/2026
 
 O desenvolvedor confirmou que o cadastro da conta do vendedor foi concluído após corrigir o limite da senha em `CriarUsuarioVendedorDto.Senha`. A conta foi vinculada ao vendedor ativo de ID 5. **Ainda falta a validação do script `Executar_Teste_JWT_Vendedor.ps1`** para comprovar o isolamento de acesso, respostas 403 das rotas administrativas e vinculação da carteira. Não registrar a Aula 10.1 como concluída antes desses testes. Nenhuma senha ou token é versionado.
+
+
+## Testes JWT do vendedor aprovados — 26/10/2026
+
+O desenvolvedor executou `Executar_Teste_JWT_Vendedor.ps1` e compartilhou o resultado **TESTES JWT VENDEDOR APROVADOS**: login com perfil correto, claim do vendedor confirmada, 1 cliente e 1 pedido da carteira, três bloqueios administrativos **HTTP 403**, nenhuma baixa no estoque. A autenticação e autorização de leitura do Vendedor estão verificadas localmente. A execução do script separado de teste do Admin não foi apresentada nesta etapa. Próxima: [Aula 10.2 — Pedido autenticado](10-2-PEDIDOS-AUTENTICADOS.md).
