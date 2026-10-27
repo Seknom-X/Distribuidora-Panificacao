@@ -322,3 +322,7 @@ O desenvolvedor informou que a Aula 13 funcionou localmente; **não foi fornecid
 ## 26. Aula 14.2 — Registros de auditoria HTTP (preparada, aguardando validação)
 
 O desenvolvedor informou que a Aula 14.1 de consultas/histórico funcionou. A [Aula 14.2](docs/14-2-AUDITORIA-OPERACOES.md) adiciona `RegistrosAuditoria`, middleware de registro após operações POST/PUT/PATCH/DELETE autenticadas com HTTP 2xx e consulta Admin ao histórico. A gravação é **posterior e independente**, portanto não é uma auditoria transacional/inviolável e não captura todos os insucessos. **Pacote preparado; build, migration `RegistrosAuditoria`, xUnit e PowerShell ainda pendentes.** Após validar, continuar para a Aula 15 (MVC administrativo).
+
+## 27. Aula 15.1 — Painel Web MVC (preparada)
+
+Preparado o primeiro [painel administrativo MVC](docs/15-1-MVC-LOGIN-DASHBOARD.md): login Admin pela API JWT, sessão do navegador em cookie protegido com Data Protection, dashboard e listagens de Vendedores/Clientes/Produtos/Vendas, logout com antiforgery. **Sem migration, sem alterações na API, sem gravação de dados pelo painel nesta subetapa**. O pacote contém 18 arquivos; instala serviços no `Distribuidora.Web/Program.cs` através de script com backup. **Ainda aguardando build, teste PowerShell e validação visual no Windows.** A Aula 14.2 não teve resultado de teste específico enviado; não marcar sua auditoria persistente como concluída só por iniciar a Aula 15.
