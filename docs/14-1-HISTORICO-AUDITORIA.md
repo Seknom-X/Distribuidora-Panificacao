@@ -61,3 +61,8 @@ O script pede login do Admin e do Vendedor sem exibir as senhas. Precisa existir
 Não produz log permanente de ações; não concilia extratos bancários externos nem boletos/Pix reais. Concorrência, estornos, regras de juros/descontos e fechamento das janelas exigem testes posteriores. Não expor a API fora de localhost até completar a revisão de segurança.
 
 **Aguardando `Build succeeded`, resultado xUnit e script para marcar concluída.**
+
+
+## Retorno de validação da Aula 14.1 — 26/10/2026
+
+O desenvolvedor confirmou que os testes da Aula 14.1 funcionaram com a mensagem **“certinho”**. Não foi anexado o log completo para demonstrar cada código HTTP separadamente; registrar como **fluxo básico confirmado**, não como revisão independente da segurança. A trilha persistente de operações será abordada na [Aula 14.2](14-2-AUDITORIA-OPERACOES.md).
