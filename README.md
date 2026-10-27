@@ -292,6 +292,11 @@ O restante do MVP foi dividido em **dez macroetapas didáticas (Aulas 10–19)**
 Preparado o pacote da [Aula 10.1](docs/10-1-AUTENTICACAO-JWT.md) com login JWT, Admin por bootstrap local, contas vinculadas a vendedores, restrição Admin por padrão e rotas de leitura `/api/me` para Vendedor. **Migração `UsuariosAutenticacao` aplicada, Admin cadastrado, conta do Vendedor criada, e testes JWT do Vendedor aprovados em 26/10/2026.** As APIs antigas passarão a exigir Bearer Admin; scripts sem token receberão 401. Não expor o serviço na rede antes de revisar a segurança.
 
 
-### Aula 10.2 (preparada, aguardando validação)
+### Aula 10.2 (fluxo básico validado)
 
-Novo POST autenticado `/api/me/pedidos`, derivando o `vendedorId` exclusivamente do JWT e impedindo cadastros para clientes de outras carteiras. Também há GET de detalhe protegido, xUnit de contrato e script PowerShell com idempotência/401/403/409. **Nenhuma migration; testes da Aula 10.2 ainda pendentes.** [Instruções](docs/10-2-PEDIDOS-AUTENTICADOS.md).
+Novo POST autenticado `/api/me/pedidos`, derivando o `vendedorId` exclusivamente do JWT e impedindo cadastros para clientes de outras carteiras. Também há GET de detalhe protegido, xUnit de contrato e script PowerShell com idempotência/401/403/409. **Nenhuma migration; desenvolvedor confirmou funcionamento após cadastro de cliente para o vendedor 5; testes de concorrência pendentes.** [Instruções](docs/10-2-PEDIDOS-AUTENTICADOS.md).
+
+
+## 22. Aula 11 — Vendas (preparada; aguardando testes)
+
+O pacote adiciona `Vendas` e `ItensVenda`, com `PedidoId` único e referência a itens efetivamente atendidos. Emissão comercial não faz nova baixa de estoque; valor vem da quantidade atendida e do preço histórico do pedido. Migration `VendasItensVenda`, xUnit e PowerShell `Executar_Teste_Vendas.ps1` **pendentes de execução no Windows**. Ver [documentação da Aula 11](docs/11-VENDAS-PEDIDOS-ATENDIDOS.md).
