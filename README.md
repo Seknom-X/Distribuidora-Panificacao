@@ -312,3 +312,8 @@ O pacote adiciona `Vendas` e `ItensVenda`, com `PedidoId` único e referência a
 ## 24. Aula 13 — Contas a receber (preparada, sem testes)
 
 A implementação da [Aula 13](docs/13-CONTAS-RECEBER-PAGAMENTOS.md) adiciona `ContasReceber`, `ParcelasReceber` e `Recebimentos`; emite títulos a partir de vendas, controla saldo por parcela e registra pagamento parcial com UUID idempotente e UPDATE condicional transacional. **Aula 12 ainda precisa de confirmação dos testes e da migration. Aula 13 aguarda compilação, revisão da migration `ContasReceberPagamentos` e testes no Windows.** O script de teste padrão cria conta sem receber pagamento; `-RegistrarPagamentoTeste` requer confirmação explícita e registra R$ 5,00 de teste no MySQL local. Cobrança real Pix/boleto, juros e multas não estão implementados.
+
+
+## 25. Aula 14.1 — Histórico de carteira e conferência financeira (preparada)
+
+O desenvolvedor informou que a Aula 13 funcionou localmente; **não foi fornecida evidência sobre a execução do pagamento opcional de R$ 5,00**. A [Aula 14.1](docs/14-1-HISTORICO-AUDITORIA.md) acrescenta consulta somente leitura ao histórico de pedidos/vendas e débitos de um cliente do vendedor autenticado, além de conferência financeira Admin entre vendas, contas, parcelas e recebimentos. Pacote com somente arquivos novos, **sem migration**. Build, xUnit e testes PowerShell ainda pendentes. **Não constitui log persistente de auditoria**, que permanece planejado.
