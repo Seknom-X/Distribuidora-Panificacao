@@ -79,3 +79,8 @@ Na execução do script `Executar_Teste_Pedido_JWT_Vendedor.ps1`, o desenvolvedo
 Pacote de recuperação `Correcao_Aula10_2_Carteira_e_Teste_JWT.zip` inclui dois scripts: `Executar_Teste_Pedido_JWT_Vendedor_CORRIGIDO.ps1` (contagem por JSON bruto, diagnóstico, demais verificações) e `Cadastrar_Cliente_Teste_JWT_Admin.ps1` (login Admin, consulta carteira, criação opcional de padaria fictícia para vendedor ativo, somente com confirmação S, somente localhost). Nenhum arquivo C# é alterado e nenhuma migration é necessária. A criação de cliente/pedido de teste modifica apenas dados do MySQL de desenvolvimento, sem baixa de estoque.
 
 **Status:** correção entregue; cadastro do cliente e aprovação da Aula 10.2 ainda precisam ser confirmados pelo desenvolvedor.
+
+
+## Teste aprovado pelo desenvolvedor — 26/10/2026
+
+O desenvolvedor confirmou que o teste corrigido do cadastro de pedido autenticado funcionou depois da criação de cliente ativo na carteira do vendedor ID 5. A confirmação foi verbal (`certinho`), sem o log integral de todos os cenários: registrar como **fluxo básico validado localmente**, sem afirmar testes independentes de concorrência e isolamento entre vários vendedores. Na Aula 10.2, criar pedido pendente não desconta estoque. O próximo módulo é a [Aula 11 — Vendas](11-VENDAS-PEDIDOS-ATENDIDOS.md).
