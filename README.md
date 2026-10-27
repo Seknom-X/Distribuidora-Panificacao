@@ -317,3 +317,8 @@ A implementação da [Aula 13](docs/13-CONTAS-RECEBER-PAGAMENTOS.md) adiciona `C
 ## 25. Aula 14.1 — Histórico de carteira e conferência financeira (preparada)
 
 O desenvolvedor informou que a Aula 13 funcionou localmente; **não foi fornecida evidência sobre a execução do pagamento opcional de R$ 5,00**. A [Aula 14.1](docs/14-1-HISTORICO-AUDITORIA.md) acrescenta consulta somente leitura ao histórico de pedidos/vendas e débitos de um cliente do vendedor autenticado, além de conferência financeira Admin entre vendas, contas, parcelas e recebimentos. Pacote com somente arquivos novos, **sem migration**. Build, xUnit e testes PowerShell ainda pendentes. **Não constitui log persistente de auditoria**, que permanece planejado.
+
+
+## 26. Aula 14.2 — Registros de auditoria HTTP (preparada, aguardando validação)
+
+O desenvolvedor informou que a Aula 14.1 de consultas/histórico funcionou. A [Aula 14.2](docs/14-2-AUDITORIA-OPERACOES.md) adiciona `RegistrosAuditoria`, middleware de registro após operações POST/PUT/PATCH/DELETE autenticadas com HTTP 2xx e consulta Admin ao histórico. A gravação é **posterior e independente**, portanto não é uma auditoria transacional/inviolável e não captura todos os insucessos. **Pacote preparado; build, migration `RegistrosAuditoria`, xUnit e PowerShell ainda pendentes.** Após validar, continuar para a Aula 15 (MVC administrativo).
