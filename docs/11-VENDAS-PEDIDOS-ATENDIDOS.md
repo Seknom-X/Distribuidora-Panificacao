@@ -61,3 +61,17 @@ O desenvolvedor recebeu **HTTP 401** em `Executar_Teste_Vendas.ps1:43`, especifi
 A API utiliza `[AllowAnonymous]` nessa rota, pesquisa o e-mail normalizado em `Usuarios`, valida que `Ativo=true` e confere o hash com `PasswordHasher<UsuarioSistema>`; senha ou e-mail incorretos também retornam 401. Primeiro testar a conta com `Executar_Teste_JWT_Admin.ps1`; depois conferir `SELECT Id, Email, Perfil, Ativo FROM Usuarios` no banco local, se necessário, **sem consultar/expor o hash**. Para senha com caracteres não ASCII, pode haver diferença de codificação de JSON no PowerShell antigo.
 
 Disponibilizado `Executar_Teste_Vendas_LOGIN_AJUSTADO.ps1`, que envia o corpo de login em bytes **UTF-8** com `application/json; charset=utf-8`, remove espaços no e-mail e apresenta diagnóstico específico em 401 sem imprimir credenciais. O novo script só emite venda **após login Admin bem-sucedido**. Um segundo ZIP contém o mesmo script e instruções. **A validação da emissão de venda ainda está pendente** até o desenvolvedor executar o novo teste.
+
+
+## Teste funcional de emissão aprovado — 26/10/2026
+
+O desenvolvedor apresentou log PowerShell executando `Executar_Teste_Vendas_LOGIN_AJUSTADO.ps1 -PedidoId 1` no MySQL de desenvolvimento:
+
+- Login Admin autenticado; venda **ID=1**, originada do **Pedido ID=1**.
+- Primeira emissão **HTTP 201**, valor total **R$ 37,50**, quantidade vendida **3 unidades**.
+- Reenvio idempotente **HTTP 200** com o **mesmo ID**.
+- Estoque consultado antes e depois: **inalterado**.
+- Acesso sem JWT: **HTTP 401**.
+- Mensagem final: **Aula 11: TESTES PRINCIPAIS APROVADOS**.
+
+**Ainda não demonstrado:** teste 403 usando JWT de Vendedor, concorrência, rollback e teste repetido de falhas. O sistema não gera recebíveis nesta etapa; [Aula 12](12-CONDICOES-PARCELAMENTO.md) prepara apenas condições e simulação de parcelas, com persistência financeira planejada para a Aula 13.
