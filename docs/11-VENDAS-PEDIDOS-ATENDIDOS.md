@@ -52,3 +52,12 @@ O script pode **criar uma venda permanente no banco de desenvolvimento**. Não c
 ## Correção do script de teste PowerShell — 26/10/2026
 
 A execução do `Executar_Teste_Vendas.ps1` original apresentou `ParserError` na linha 56: interpolação de `$PedidoId:` dentro da string. O PowerShell interpreta os dois-pontos como parte do identificador da variável. A correção é `"Pedido ${PedidoId}: unidades atendidas = $quantidade; estoque consultado."`. Foi entregue um script avulso `Executar_Teste_Vendas_CORRIGIDO.ps1` e um ZIP da Aula 11 atualizado, ambos com a linha corrigida. Nenhum arquivo C#, migration ou banco precisa ser alterado. **O teste de emissão de venda continua aguardando execução no Windows do desenvolvedor.**
+
+
+## Diagnóstico de HTTP 401 no login do script de vendas — 26/10/2026
+
+O desenvolvedor recebeu **HTTP 401** em `Executar_Teste_Vendas.ps1:43`, especificamente no `POST /api/auth/login`. Isso ocorre **antes** da emissão da venda do pedido 1 e não comprova erro de lógica de venda nem baixa duplicada.
+
+A API utiliza `[AllowAnonymous]` nessa rota, pesquisa o e-mail normalizado em `Usuarios`, valida que `Ativo=true` e confere o hash com `PasswordHasher<UsuarioSistema>`; senha ou e-mail incorretos também retornam 401. Primeiro testar a conta com `Executar_Teste_JWT_Admin.ps1`; depois conferir `SELECT Id, Email, Perfil, Ativo FROM Usuarios` no banco local, se necessário, **sem consultar/expor o hash**. Para senha com caracteres não ASCII, pode haver diferença de codificação de JSON no PowerShell antigo.
+
+Disponibilizado `Executar_Teste_Vendas_LOGIN_AJUSTADO.ps1`, que envia o corpo de login em bytes **UTF-8** com `application/json; charset=utf-8`, remove espaços no e-mail e apresenta diagnóstico específico em 401 sem imprimir credenciais. O novo script só emite venda **após login Admin bem-sucedido**. Um segundo ZIP contém o mesmo script e instruções. **A validação da emissão de venda ainda está pendente** até o desenvolvedor executar o novo teste.
