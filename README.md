@@ -307,3 +307,8 @@ O pacote adiciona `Vendas` e `ItensVenda`, com `PedidoId` único e referência a
 **Aula 11:** testes principais **aprovados no Windows**: venda ID 1 do pedido ID 1 com 3 unidades atendidas, R$ 37,50; emissão HTTP 201, reenvio idempotente HTTP 200 com o mesmo ID, estoque inalterado e 401 sem JWT. Testes com perfil Vendedor (403), concorrência e rollback ainda pendentes. [Evidências](docs/11-VENDAS-PEDIDOS-ATENDIDOS.md).
 
 **Aula 12:** condições de pagamento (1–12 parcelas, soma 100%, vencimento por dias) e **simulação financeira sem persistir recebíveis**. Pacote preparado para .NET 10 / EF Core 9; aguardando build, migration `CondicoesPagamentoParcelas` e teste. [Planejamento](docs/12-CONDICOES-PARCELAMENTO.md). A criação das contas a receber fica para a Aula 13.
+
+
+## 24. Aula 13 — Contas a receber (preparada, sem testes)
+
+A implementação da [Aula 13](docs/13-CONTAS-RECEBER-PAGAMENTOS.md) adiciona `ContasReceber`, `ParcelasReceber` e `Recebimentos`; emite títulos a partir de vendas, controla saldo por parcela e registra pagamento parcial com UUID idempotente e UPDATE condicional transacional. **Aula 12 ainda precisa de confirmação dos testes e da migration. Aula 13 aguarda compilação, revisão da migration `ContasReceberPagamentos` e testes no Windows.** O script de teste padrão cria conta sem receber pagamento; `-RegistrarPagamentoTeste` requer confirmação explícita e registra R$ 5,00 de teste no MySQL local. Cobrança real Pix/boleto, juros e multas não estão implementados.
