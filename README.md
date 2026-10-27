@@ -300,3 +300,10 @@ Novo POST autenticado `/api/me/pedidos`, derivando o `vendedorId` exclusivamente
 ## 22. Aula 11 — Vendas (preparada; aguardando testes)
 
 O pacote adiciona `Vendas` e `ItensVenda`, com `PedidoId` único e referência a itens efetivamente atendidos. Emissão comercial não faz nova baixa de estoque; valor vem da quantidade atendida e do preço histórico do pedido. Migration `VendasItensVenda`, xUnit e PowerShell `Executar_Teste_Vendas.ps1` **pendentes de execução no Windows**. Ver [documentação da Aula 11](docs/11-VENDAS-PEDIDOS-ATENDIDOS.md).
+
+
+## 23. Aulas 11–12 — Vendas e parcelamento (26/10/2026)
+
+**Aula 11:** testes principais **aprovados no Windows**: venda ID 1 do pedido ID 1 com 3 unidades atendidas, R$ 37,50; emissão HTTP 201, reenvio idempotente HTTP 200 com o mesmo ID, estoque inalterado e 401 sem JWT. Testes com perfil Vendedor (403), concorrência e rollback ainda pendentes. [Evidências](docs/11-VENDAS-PEDIDOS-ATENDIDOS.md).
+
+**Aula 12:** condições de pagamento (1–12 parcelas, soma 100%, vencimento por dias) e **simulação financeira sem persistir recebíveis**. Pacote preparado para .NET 10 / EF Core 9; aguardando build, migration `CondicoesPagamentoParcelas` e teste. [Planejamento](docs/12-CONDICOES-PARCELAMENTO.md). A criação das contas a receber fica para a Aula 13.
