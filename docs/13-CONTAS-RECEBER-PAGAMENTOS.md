@@ -90,3 +90,8 @@ O teste utiliza condições ativas pré-existentes. Se a Aula 12 não foi aplica
 - As contas de cliente são consultáveis apenas por Admin nesta etapa; disponibilizar consulta restrita ao Vendedor exige rota baseada no JWT em aula posterior.
 - Confirmação em Workbench e log de testes devem ser fornecidos antes de marcar a aula como concluída.
 - Segurança e testes de integração continuam pendentes para o MVP. Utilizar apenas localhost.
+
+
+## Retorno de validação do desenvolvedor — 26/10/2026
+
+O desenvolvedor informou `deu certinho` após o roteiro da Aula 13. Isso sustenta que conseguiu avançar no fluxo local, mas **não foi fornecido o log** para identificar precisamente se foram realizados apenas os testes de geração/consulta da conta ou também os pagamentos parciais com `-RegistrarPagamentoTeste`. A documentação não deve declarar o pagamento opcional validado sem essa evidência. Próxima etapa: [Aula 14.1 — Histórico e conferência financeira](14-1-HISTORICO-AUDITORIA.md).
