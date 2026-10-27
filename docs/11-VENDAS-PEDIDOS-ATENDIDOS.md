@@ -47,3 +47,8 @@ Exemplo validado nas aulas anteriores: pedido ID 1, produto ID 4, 8 unidades sol
 O script pode **criar uma venda permanente no banco de desenvolvimento**. Não cria saldo financeiro, NF-e, boleto, Pix ou recebimentos; pagamentos/parcelas são a Aula 12. Nenhum teste automatizado de concorrência ou estorno foi apresentado. A API ainda é destinada a localhost e necessita de revisão de segurança antes de produção.
 
 **Próxima etapa:** condições e parcelas de pagamento da venda.
+
+
+## Correção do script de teste PowerShell — 26/10/2026
+
+A execução do `Executar_Teste_Vendas.ps1` original apresentou `ParserError` na linha 56: interpolação de `$PedidoId:` dentro da string. O PowerShell interpreta os dois-pontos como parte do identificador da variável. A correção é `"Pedido ${PedidoId}: unidades atendidas = $quantidade; estoque consultado."`. Foi entregue um script avulso `Executar_Teste_Vendas_CORRIGIDO.ps1` e um ZIP da Aula 11 atualizado, ambos com a linha corrigida. Nenhum arquivo C#, migration ou banco precisa ser alterado. **O teste de emissão de venda continua aguardando execução no Windows do desenvolvedor.**
