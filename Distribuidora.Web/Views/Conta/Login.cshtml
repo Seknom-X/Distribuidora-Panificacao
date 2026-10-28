@@ -1,0 +1,7 @@
+@{ ViewData["Title"] = "Acesso administrativo"; }
+<h1>Acesso administrativo</h1><p>Distribuidora de Panificação</p>
+<p role="alert" class="text-danger">@ViewBag.Erro</p>
+<form method="post">@Html.AntiForgeryToken()
+<label>E-mail<input class="form-control" type="email" name="email" required autocomplete="username" maxlength="180" /></label>
+<label>Senha<input class="form-control" type="password" name="senha" required autocomplete="current-password" maxlength="128" /></label>
+<button class="btn btn-primary">Entrar</button></form>

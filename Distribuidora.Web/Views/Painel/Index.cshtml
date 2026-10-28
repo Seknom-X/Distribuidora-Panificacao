@@ -1,0 +1,7 @@
+@using Distribuidora.Web.Models
+@{ ViewData["Title"]="Painel administrativo"; }
+<h1>Distribuidora de Panificação</h1><p>Operação administrativa · @User.Identity?.Name</p>
+<div class="row g-3">@foreach(var item in Operacoes.Todas) { <div class="col-md-4"><a class="card p-3" href="@Url.Action("Modulo",new { chave=item.Key })">@item.Value.Nome</a></div> }</div>
+<h2 class="mt-4">Resumo operacional</h2><p>Totais consolidados da base. Valores em reais.</p>
+<p class="text-danger" role="alert">@ViewBag.Erro</p>
+@if(ViewBag.Resumo is System.Text.Json.JsonElement resumo) { @await Html.PartialAsync("_Dados",resumo) }

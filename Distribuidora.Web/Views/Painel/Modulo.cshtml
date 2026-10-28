@@ -1,0 +1,28 @@
+@model Distribuidora.Web.Models.TelaPainel
+@{ ViewData["Title"]=Model.Operacao.Nome; }
+<a href="/">← Painel</a><h1>@Model.Operacao.Nome</h1>
+<p role="alert" class="text-danger">@ViewBag.Erro</p><p role="status">@ViewBag.Sucesso</p>
+@if(Model.Operacao.Metodo!="GET" || Model.Operacao.Campos.Length>0) {
+<form method="post" asp-action="Executar">@Html.AntiForgeryToken()<input type="hidden" name="chave" value="@Model.Chave" />
+<input type="hidden" name="editar" value="@Model.Valores.GetValueOrDefault("editar")" />
+@foreach(var f in Model.Operacao.Campos) {
+ <div class="mb-3"><label class="form-label">@f.Rotulo</label>
+ @if(f.Tipo is "itens" or "parcelas") {
+ <p>@(f.Tipo=="itens" ? "Informe o código do produto e a quantidade. Deixe linhas não utilizadas em branco." : "Informe dias após venda e percentual. A soma deve ser 100%.")</p>
+ @for(var i=0;i<12;i++) { <div class="d-flex gap-2 mb-1"><input aria-label="@(f.Tipo=="itens" ? "Produto" : "Dias")" class="form-control" name="@(f.Nome+"A")" type="number" min="0" /><input aria-label="@(f.Tipo=="itens" ? "Quantidade" : "Percentual")" class="form-control" name="@(f.Nome+"B")" type="number" step="0.01" min="0" /></div> }
+ } else { <input class="form-control" name="@f.Nome" type="@(f.Tipo is "uuid" or "decimal" or "ids" ? "text" : f.Tipo)" value="@(f.Tipo=="password" ? "" : Model.Valores.GetValueOrDefault(f.Nome))" required="@(f.Nome!="observacao" && f.Nome!="telefone" && f.Nome!="descricao")" /> }
+ </div>
+}
+<button class="btn btn-primary">@(Model.Operacao.Metodo=="GET" ? "Consultar" : "Confirmar operação")</button></form>
+}
+@if(Model.Dados is {} dados) {
+ @if(dados.ValueKind==System.Text.Json.JsonValueKind.Array && dados.GetArrayLength()>0 && dados[0].ValueKind==System.Text.Json.JsonValueKind.Object) {
+ <div class="table-responsive mt-4"><table class="table table-striped"><thead><tr>@foreach(var p in dados[0].EnumerateObject()) { <th>@p.Name</th> }<th>Ações</th></tr></thead><tbody>
+ @foreach(var row in dados.EnumerateArray()) { <tr>@foreach(var p in row.EnumerateObject()) { <td>@await Html.PartialAsync("_Dados",p.Value)</td> }<td>
+ @if(Model.Operacao.Metodo=="CRUD" && row.TryGetProperty("id",out var id)) { <a href="@Url.Action("Modulo",new {chave=Model.Chave,editar=id.GetInt32()})">Editar</a><form method="post" asp-action="Desativar">@Html.AntiForgeryToken()<input type="hidden" name="chave" value="@Model.Chave"/><input type="hidden" name="id" value="@id"/><button class="btn btn-sm btn-outline-danger">Desativar</button></form> }
+ </td></tr> }
+ </tbody></table></div>
+ } else { @await Html.PartialAsync("_Dados",dados) }
+}
+
+

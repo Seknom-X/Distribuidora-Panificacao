@@ -1,0 +1,10 @@
+@model System.Text.Json.JsonElement
+@using System.Text.Json
+@using System.Text.RegularExpressions
+@if(Model.ValueKind==JsonValueKind.Object) {
+ <dl class="row">@foreach(var p in Model.EnumerateObject()) { <dt class="col-sm-4">@Regex.Replace(p.Name,"([a-z])([A-Z])","$1 $2")</dt><dd class="col-sm-8">@await Html.PartialAsync("_Dados",p.Value)</dd> }</dl>
+} else if(Model.ValueKind==JsonValueKind.Array) {
+ @if(Model.GetArrayLength()==0) { <span>Nenhum registro.</span> }
+ else { <ul>@foreach(var item in Model.EnumerateArray()) { <li>@await Html.PartialAsync("_Dados",item)</li> }</ul> }
+} else if(Model.ValueKind is JsonValueKind.True or JsonValueKind.False) { <span>@(Model.GetBoolean()?"Sim":"Não")</span>
+} else { <span>@Model.ToString()</span> }
